@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/carlosbritto32/moviedb-api-rest/issues"
   },
-  "homepage": "https://github.com/carlosbritto32/moviedb-api-rest#readme"
+  "homepage": "https://github.com/carlosbritto32/moviedb-api-rest#readme",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
 }
