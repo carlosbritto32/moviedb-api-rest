@@ -11,6 +11,8 @@ const api = axios.create({
 const trending = "/trending/movie/day";
 const genre = "/genre/movie/list";
 const discoverGenre = "/discover/movie";
+const searchMovie = "/search/movie";
+const searchMovieById = "/movie/";
 
 // UTILS
 function createMovies(movies, container) {
@@ -18,6 +20,10 @@ function createMovies(movies, container) {
   movies.forEach((movie) => {
     const movieContainer = document.createElement("div");
     movieContainer.classList.add("movie-container");
+    movieContainer.addEventListener("click", () => {
+      location.hash = `#movie=${movie.id}`;
+    });
+
     const movieImg = document.createElement("img");
     movieImg.classList.add("movie-img");
 
@@ -26,9 +32,6 @@ function createMovies(movies, container) {
       `https://image.tmdb.org/t/p/w300/${movie.poster_path}`
     );
     movieImg.setAttribute("alt", movie.title);
-    movieImg.addEventListener("click", () => {
-      location.hash = `#movie=${movie.id}-${movie.title}`;
-    });
 
     movieContainer.appendChild(movieImg);
     container.appendChild(movieContainer);
@@ -82,4 +85,51 @@ async function getMoviesByCategory(id) {
 
   console.log(movies);
   createMovies(movies, genericSection);
+}
+
+async function getMoviesBySearch(query) {
+  const { data } = await api(`${searchMovie}`, {
+    params: {
+      query: query,
+    },
+  });
+
+  const movies = data.results;
+  console.log(movies);
+  createMovies(movies, genericSection);
+}
+
+async function getTrendingMovies() {
+  const { data } = await api(`${trending}`);
+  const movies = data.results;
+
+  console.log(movies);
+  createMovies(movies, genericSection);
+}
+
+async function getMovieById(id) {
+  const { data } = await api(`${searchMovieById}${id}`);
+
+  console.log(data);
+  const movieImgUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
+  headerSection.style.background = `linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 19.27%,
+    rgba(0, 0, 0, 0) 29.17%
+  ),
+  url(${movieImgUrl})`;
+
+  movieDetailTitle.textContent = data.title;
+  movieDetailDescription.textContent = data.overview;
+  movieDetailScore.textContent = data.vote_average.toFixed(1);
+
+  createCategories(data.genres, movieDetailCategoriesList);
+}
+
+async function getRelatedMovies(id) {
+  const { data } = await api(`${searchMovieById}${id}/recommendations`);
+  const movies = data.results;
+  console.log("related", movies);
+
+  createMovies(movies, relatedMoviesContainer);
 }

@@ -1,10 +1,11 @@
 searchFormBtn.addEventListener("click", () => {
-  location.hash = "#search=";
+  location.hash = `#search=${searchFormInput.value}`;
 });
 trendingBtn.addEventListener("click", () => {
   location.hash = "#trends";
 });
 arrowBtn.addEventListener("click", () => {
+  // history.back(); this is a function to go back like histroy search instead to go to the main page
   location.hash = "";
 });
 
@@ -43,9 +44,11 @@ function homePage() {
   genericSection.classList.add("inactive");
   movieDetailSection.classList.add("inactive");
 
+  headerSection.style.background = ``;
   getTrendingMoviesPreview();
   getCategoriesPreview();
 }
+
 function categoriesPage() {
   console.log("Categories!!");
   headerSection.classList.remove("header-container--long");
@@ -85,6 +88,12 @@ function movieDetailsPage() {
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.add("inactive");
   movieDetailSection.classList.remove("inactive");
+
+  const [movieName, id] = location.hash.split("=");
+  getMovieById(id);
+
+  // relatedMovies
+  getRelatedMovies(id);
 }
 function searchPage() {
   console.log("Search!!");
@@ -94,13 +103,16 @@ function searchPage() {
   arrowBtn.classList.remove("inactive");
   arrowBtn.classList.remove("header-arrow--white");
   headerTitle.classList.add("inactive");
-  headerCategoryTitle.classList.remove("inactive");
+  headerCategoryTitle.classList.add("inactive");
   searchForm.classList.remove("inactive");
 
   trendingPreviewSection.classList.add("inactive");
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
+
+  const [_, query] = location.hash.split("=");
+  getMoviesBySearch(query);
 }
 function trendsPage() {
   console.log("TRENDS!!");
@@ -117,4 +129,7 @@ function trendsPage() {
   categoriesPreviewSection.classList.add("inactive");
   genericSection.classList.remove("inactive");
   movieDetailSection.classList.add("inactive");
+
+  headerCategoryTitle.innerHTML = "Trends";
+  getTrendingMovies();
 }
