@@ -63,7 +63,6 @@ async function getTrendingMoviesPreview() {
   const { data } = await api(`${trending}`);
   const movies = data.results;
 
-  console.log(movies);
   createMovies(movies, trendingMoviesPreviewList);
 }
 
@@ -71,7 +70,6 @@ async function getCategoriesPreview() {
   const { data } = await api(`${genre}`);
   const categories = data.genres;
 
-  console.log(categories);
   createCategories(categories, categoriesPreviewList);
 }
 
@@ -83,7 +81,6 @@ async function getMoviesByCategory(id) {
   });
   const movies = data.results;
 
-  console.log(movies);
   createMovies(movies, genericSection);
 }
 
@@ -95,7 +92,6 @@ async function getMoviesBySearch(query) {
   });
 
   const movies = data.results;
-  console.log(movies);
   createMovies(movies, genericSection);
 }
 
@@ -103,14 +99,12 @@ async function getTrendingMovies() {
   const { data } = await api(`${trending}`);
   const movies = data.results;
 
-  console.log(movies);
   createMovies(movies, genericSection);
 }
 
 async function getMovieById(id) {
   const { data } = await api(`${searchMovieById}${id}`);
 
-  console.log(data);
   const movieImgUrl = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
   headerSection.style.background = `linear-gradient(
     180deg,
@@ -129,7 +123,6 @@ async function getMovieById(id) {
 async function getRelatedMovies(id) {
   const { data } = await api(`${searchMovieById}${id}/recommendations`);
   const movies = data.results;
-  console.log("related", movies);
 
   createMovies(movies, relatedMoviesContainer);
 }
