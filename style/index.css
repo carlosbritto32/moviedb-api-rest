@@ -112,6 +112,8 @@ footer {
 
 .movie-container {
   cursor: pointer;
+  display: flex;
+  text-align: center;
 }
 
 .movie-container--loading {
@@ -135,6 +137,7 @@ footer {
 }
 
 .movie-img {
+  min-height: 200px;
   border-radius: 8px;
 }
 
