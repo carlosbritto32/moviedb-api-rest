@@ -17,8 +17,13 @@
   </head>
   <body>
     <header id="header" class="header-container">
+      <div class="lang">
+        <select name="language" id="la">
+          <option value="en">English</option>
+        </select>
+      </div>
       <span class="header-arrow inactive">&lt;</span>
-      <h1 class="header-title">MoviesApp!😎</h1>
+      <h1 class="header-title">MoviesApp!📽️🍿</h1>
       <h1 class="header-title header-title--categoryView inactive"></h1>
 
       <form id="searchForm" class="header-searchForm">
@@ -54,6 +59,22 @@
         <div class="category-container category-container--loading"></div>
         <div class="category-container category-container--loading">
           <!-- <h3 id="id28" class="category-title">Romance</h3> -->
+        </div>
+      </article>
+    </section>
+
+    <section id="favorites" class="favorites-container">
+      <div class="favorites-header">
+        <h2 class="favorites-movies">Favorite Movies</h2>
+      </div>
+
+      <article class="favorites-movielist">
+        <div class="movie-container">
+          <img
+            src="https://image.tmdb.org/t/p/w300/adOzdWS35KAo21r9R4BuFCkLer6.jpg"
+            class="movie-img"
+            alt="Nombre de la película"
+          />
         </div>
       </article>
     </section>

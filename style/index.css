@@ -5,12 +5,12 @@
 
 :root {
   --purple-light-1: #fbfafb;
-  --purple-light-2: #eeeaf2;
-  --purple-medium-1: #aa83c8;
-  --purple-medium-2: #8b48bf;
-  --purple-medium-3: #5c218a;
-  --purple-dark-1: #3e0f64;
-  --purple-dark-2: #2a0646;
+  --purple-light-2: #efefef;
+  --purple-medium-1: #7fb5ff;
+  --purple-medium-2: #395b64;
+  --purple-medium-3: #607eaa;
+  --purple-dark-1: #003865;
+  --purple-dark-2: #032541;
 
   --yellow: #eecc75;
   --green: #cad297;
@@ -92,28 +92,43 @@ button {
   cursor: pointer;
 }
 
+select {
+  width: 100px;
+  height: 30px;
+  background-color: var(--purple-dark-1);
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  color: var(--purple-light-2);
+  font-weight: var(--font-weight-text2);
+  font-size: 14px;
+  cursor: pointer;
+}
+
 /* Shared */
 .header-container,
 .trendingPreview-header,
-.categoriesPreview-container {
+.categoriesPreview-container,
+.favorites-header {
   padding: 0 24px;
 }
 
 .trendingPreview-container,
 .categoriesPreview-container,
-footer {
+footer,
+.favorites-container {
   margin-top: 48px;
 }
 
 .trendingPreview-header,
-.categoriesPreview-title {
+.categoriesPreview-title,
+.favorites-header {
   margin-bottom: 24px;
 }
 
 .movie-container {
   cursor: pointer;
-  display: flex;
-  text-align: center;
+  position: relative;
 }
 
 .movie-container--loading {
@@ -139,6 +154,29 @@ footer {
 .movie-img {
   min-height: 200px;
   border-radius: 8px;
+}
+
+.movie-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  padding: 0;
+  margin: 0;
+}
+
+.movie-btn::before {
+  content: "🤍";
+}
+
+.movie-btn--favorite {
+  background: var(--purple-light-2);
+}
+
+.movie-btn--favorite::before {
+  content: "💙";
 }
 
 .categoriesPreview-list,
@@ -193,6 +231,11 @@ footer {
   );
 }
 
+.lang {
+  display: flex;
+  justify-content: end;
+}
+
 .header-title {
   margin-bottom: 16px;
 }
@@ -230,7 +273,8 @@ footer {
 }
 
 /* Trending */
-.trendingPreview-header {
+.trendingPreview-header,
+.favorites-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -242,7 +286,8 @@ footer {
   width: 72px;
 }
 
-.trendingPreview-movieList {
+.trendingPreview-movieList,
+.favorites-movielist {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
@@ -251,12 +296,14 @@ footer {
   padding-bottom: 16px;
 }
 
-.trendingPreview-movieList .movie-container {
+.trendingPreview-movieList .movie-container,
+.favorites-movielist .movie-container {
   display: inline-block;
   margin-right: 8px;
 }
 
-.trendingPreview-movieList .movie-container .movie-img {
+.trendingPreview-movieList .movie-container .movie-img,
+.favorites-movielist .movie-container .movie-img {
   height: 225px;
   min-height: 225px;
   max-height: 225px;
